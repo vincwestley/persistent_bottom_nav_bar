@@ -10,73 +10,6 @@ part of persistent_bottom_nav_bar;
 ///To learn more, check out the [Readme](https://github.com/BilalShahid13/PersistentBottomNavBar).
 
 class PersistentTabView extends PersistentTabViewBase {
-  PersistentTabView(
-    this.context, {
-    required this.screens,
-    final Key? key,
-    final List<PersistentBottomNavBarItem>? items,
-    this.controller,
-    final double navBarHeight = kBottomNavigationBarHeight,
-    this.margin = EdgeInsets.zero,
-    this.backgroundColor = CupertinoColors.white,
-    final ValueChanged<int>? onItemSelected,
-    final NeumorphicProperties? neumorphicProperties,
-    this.floatingActionButton,
-    final NavBarPadding padding = const NavBarPadding.all(null),
-    final NavBarDecoration decoration = const NavBarDecoration(),
-    this.resizeToAvoidBottomInset = false,
-    this.bottomScreenMargin,
-    this.selectedTabScreenContext,
-    this.hideNavigationBarWhenKeyboardShows = true,
-    final bool popAllScreensOnTapOfSelectedTab = true,
-    final bool popAllScreensOnTapAnyTabs = false,
-    final PopActionScreensType popActionScreens = PopActionScreensType.all,
-    this.confineInSafeArea = true,
-    this.onWillPop,
-    this.stateManagement = true,
-    this.handleAndroidBackButtonPress = true,
-    final ItemAnimationProperties? itemAnimationProperties,
-    this.hideNavigationBar,
-    this.screenTransitionAnimation = const ScreenTransitionAnimation(),
-  })  : assert(items != null,
-            "Items can only be null in case of custom navigation bar style. Please add the items!"),
-        assert(items!.length == screens.length,
-            "screens and items length should be same. If you are using the onPressed callback function of 'PersistentBottomNavBarItem', enter a dummy screen like Container() in its place in the screens"),
-        assert(items!.length >= 2 && items.length <= 6,
-            "NavBar should have at least 2 or maximum 6 items (Except for styles 15-18)"),
-        assert(handleAndroidBackButtonPress && onWillPop == null,
-            "If you declare the onWillPop function, you will have to handle the back function functionality yourself as your onWillPop function will override the default function."),
-        super(
-          key: key,
-          context: context,
-          screens: screens,
-          controller: controller,
-          margin: margin,
-          items: items,
-          padding: padding,
-          decoration: decoration,
-          hideNavigationBarWhenKeyboardShows:
-              hideNavigationBarWhenKeyboardShows,
-          itemAnimationProperties: itemAnimationProperties,
-          popActionScreens: popActionScreens,
-          popAllScreensOnTapOfSelectedTab: popAllScreensOnTapOfSelectedTab,
-          popAllScreensOnTapAnyTabs: popAllScreensOnTapAnyTabs,
-          navBarHeight: navBarHeight,
-          backgroundColor: backgroundColor,
-          onItemSelected: onItemSelected,
-          neumorphicProperties: neumorphicProperties,
-          floatingActionButton: floatingActionButton,
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          bottomScreenMargin: bottomScreenMargin,
-          onWillPop: onWillPop,
-          isCustomWidget: false,
-          confineInSafeArea: confineInSafeArea,
-          stateManagement: stateManagement,
-          handleAndroidBackButtonPress: handleAndroidBackButtonPress,
-          hideNavigationBar: hideNavigationBar,
-          screenTransitionAnimation: screenTransitionAnimation,
-        );
-
   const PersistentTabView.custom(
     this.context, {
     required final Widget customWidget,
@@ -84,6 +17,7 @@ class PersistentTabView extends PersistentTabViewBase {
     required this.screens,
     final Key? key,
     this.controller,
+    this.navBarHeight = kBottomNavigationBarHeight,
     this.margin = EdgeInsets.zero,
     this.floatingActionButton,
     this.resizeToAvoidBottomInset = false,
@@ -108,6 +42,7 @@ class PersistentTabView extends PersistentTabViewBase {
           context: context,
           screens: screens,
           controller: controller,
+          navBarHeight: navBarHeight,
           margin: margin,
           routeAndNavigatorSettings: routeAndNavigatorSettings,
           backgroundColor: backgroundColor,
@@ -145,7 +80,8 @@ class PersistentTabView extends PersistentTabViewBase {
   ///Specifies the navBarHeight
   ///
   ///Defaults to `kBottomNavigationBarHeight` which is `56.0`.
-  //final double navBarHeight;
+  @override
+  final double? navBarHeight;
 
   ///The margin around the navigation bar.
   @override
